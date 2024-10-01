@@ -1,0 +1,11 @@
+/* yellow color */
+.second-color {
+    color: var(--second-color);
+}
+
+.bg-btn-Auth {
+    background-color: rgba(245, 245, 245, 1);
+    color: rgba(0, 0, 0, 1);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+}
