@@ -12,7 +12,7 @@ interface PasswordField {
 export interface RegisterFormData extends EmailField, PasswordField {
   first_name: string;
   last_name: string;
-  role: "Instructor" | string;
+  role: "Instructor" | "Student";
 }
 
 // Login form data extends from common fields
