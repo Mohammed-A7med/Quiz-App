@@ -52,7 +52,7 @@ export default function Login() {
 
   return (
     <>
-      
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="text-white p-4 md:p-6 lg:p-8 w-full"
