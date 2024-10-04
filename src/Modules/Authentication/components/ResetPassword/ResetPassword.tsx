@@ -58,7 +58,7 @@ export default function ResetPassword() {
         className="text-white px-4 md:px-6 lg:px-8 w-full"
       >
         {/* Email Input Group */}
-        <div className="input-group mb-6 lg:mb-9">
+        <div className="input-group mb-5 lg:mb-7">
           <label className="block mb-2 text-sm md:text-base lg:text-lg">
             Your email address
           </label>
@@ -87,7 +87,7 @@ export default function ResetPassword() {
         </div>
 
         {/* OTP Input Group */}
-        <div className="input-group  my-6 lg:my-9">
+        <div className="input-group  my-5 lg:my-7">
           <label className="block mb-2 text-sm md:text-base lg:text-lg">
             OTP
           </label>
@@ -116,7 +116,7 @@ export default function ResetPassword() {
         </div>
 
         {/* Password Input Group */}
-        <div className="input-group mt-8  my-6 lg:my-9">
+        <div className="input-group mt-8  my-5 lg:my-7">
           <label className="block mb-2 text-sm md:text-base lg:text-lg">
             Password
           </label>
