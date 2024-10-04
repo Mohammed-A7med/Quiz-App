@@ -1,15 +1,9 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import AuthLogo from "../../../../assets/Logo-white.png";
 import bgAuth from "../../../../assets/bg-auth.png";
 import Styles from "./Authlayout.module.css";
-import AuthCaption from "../CaptopnAuth/AuthCaption";
 
 export default function Authlayout() {
-  const location = useLocation();
-  const isAuthPath =
-    location.pathname.includes("login") ||
-    location.pathname.includes("register");
-
   return (
     <>
       <div className={`${Styles["bg-auth"]} min-h-screen`}>
@@ -23,9 +17,6 @@ export default function Authlayout() {
                 className="w-1/4 max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg"
               />
             </div>
-
-            {/* Show AuthCaption only if the path is login or register */}
-            {isAuthPath && <AuthCaption />}
             <Outlet />
           </div>
 

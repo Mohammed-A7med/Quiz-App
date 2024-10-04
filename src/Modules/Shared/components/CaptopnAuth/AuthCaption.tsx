@@ -59,7 +59,7 @@ export default function AuthCaption() {
       <h4 className="text-center text-base md:text-lg lg:text-xl md:text-start py-8">
         Continue your learning journey with QuizWiz!
       </h4>
-      <div className="container flex flex-col md:flex-row justify-between mx-auto mt-5 space-y-5 md:space-y-0 md:space-x-4">
+      <div className="container flex flex-col md:flex-row gap-x-12 mx-auto mt-5 space-y-5 md:space-y-0 md:space-x-4">
         {renderButton(
           "signIn",
           "Sign in",
