@@ -13,10 +13,13 @@ import {
   LoginFormData,
 } from "../../../../interfaces/Authentication/AuthResponse";
 import Styles from "../Auth.module.css";
+import AuthCaption from "../../../Shared/components/CaptopnAuth/AuthCaption";
+import { useAuth } from "../../../../store/AuthHook";
 
 export default function Login() {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const {handleSaveUserData } = useAuth();
 
   const {
     register,
@@ -40,6 +43,7 @@ export default function Login() {
       );
       console.log(response);
       localStorage.setItem("userToken", response.data.data.accessToken);
+      handleSaveUserData();
       navigate("/dashboard");
     } catch (error) {
       const axiosError = error as AxiosError<AxiosErrorResponse>;
@@ -52,13 +56,15 @@ export default function Login() {
 
   return (
     <>
+      {/* Show AuthCaption */}
+      <AuthCaption />
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="text-white p-4 md:p-6 lg:p-8 w-full"
+        className="text-white px-4 md:px-6 lg:px-8 w-full"
       >
         {/* Email Input Group */}
-        <div className="input-group  my-6 lg:my-9">
+        <div className="input-group  mb-6 lg:mb-9">
           <label className="block mb-2 text-sm md:text-base lg:text-lg">
             Registered email address
           </label>

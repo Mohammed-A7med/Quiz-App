@@ -14,6 +14,7 @@ import {
   RegisterFormData,
 } from "../../../../interfaces/Authentication/AuthResponse";
 import Styles from "../Auth.module.css";
+import AuthCaption from "../../../Shared/components/CaptopnAuth/AuthCaption";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -53,9 +54,12 @@ export default function Register() {
 
   return (
     <>
+      {/* Show AuthCaption */}
+      <AuthCaption />
+
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="text-white p-4 md:p-6 lg:p-8 w-full "
+        className="text-white px-4 md:px-6 lg:px-8 w-full "
       >
         <div className="container flex flex-col md:flex-row justify-between  mx-auto gap-x-2.5">
           {/* Left column for first name input */}
