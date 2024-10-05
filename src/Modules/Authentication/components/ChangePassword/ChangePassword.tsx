@@ -56,7 +56,10 @@ export default function ChangePassword() {
       >
         {/* Old Password Input Group */}
         <div className="input-group mt-8  my-12 lg:mb-9">
-          <label className="block mb-2 text-sm md:text-base lg:text-lg">
+          <label
+            htmlFor="OldPassword"
+            className="block mb-2 text-sm md:text-base lg:text-lg"
+          >
             Old Password
           </label>
           <div className="relative">
@@ -65,11 +68,15 @@ export default function ChangePassword() {
               className="placeholder:font-nunito placeholder:text-slate-400 block w-full bg-transparent  border-2 border-slate-300 rounded-md py-2 pl-10 pr-10 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-base lg:text-lg"
               placeholder="Type your old password"
               type={showOldPassword ? "text" : "password"}
+              id="OldPassword"
+              aria-label="Old-Password"
               {...register("password", PasswordValidation)}
             />
 
             {/* Lock Icon */}
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+            <span
+              className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+            >
               <span className="sr-only">Old Password Icon</span>
               <i className="fa-solid fa-lock text-white"></i>
             </span>
@@ -105,7 +112,7 @@ export default function ChangePassword() {
 
         {/* New Password Input Group */}
         <div className="input-group mt-8  my-6 lg:my-14">
-          <label className="block mb-2 text-sm md:text-base lg:text-lg">
+          <label htmlFor=" NewPassword" className="block mb-2 text-sm md:text-base lg:text-lg">
             New Password
           </label>
           <div className="relative">
@@ -114,6 +121,8 @@ export default function ChangePassword() {
               className="placeholder:font-nunito placeholder:text-slate-400 block w-full bg-transparent  border-2 border-slate-300 rounded-md py-2 pl-10 pr-10 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-base lg:text-lg"
               placeholder="Type your New Password"
               type={showPassword ? "text" : "password"}
+              id="NewPassword"
+              aria-label="New-Password"
               {...register("password_new", {
                 validate: (value) =>
                   value === getValues("password") || "password dont match",
@@ -121,7 +130,9 @@ export default function ChangePassword() {
             />
 
             {/* Lock Icon */}
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+            <span
+              className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+            >
               <span className="sr-only">Old Password Icon</span>
               <i className="fa-solid fa-lock text-white"></i>
             </span>
