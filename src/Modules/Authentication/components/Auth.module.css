@@ -10,3 +10,7 @@
     font-weight: 700;
 }
 
+.auth-icon {
+    inset-inline-start: 0;
+    padding-inline-start: 0.75rem;
+}
