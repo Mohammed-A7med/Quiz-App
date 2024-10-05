@@ -59,7 +59,10 @@ export default function ResetPassword() {
       >
         {/* Email Input Group */}
         <div className="input-group mb-5 lg:mb-7">
-          <label className="block mb-2 text-sm md:text-base lg:text-lg">
+          <label
+            htmlFor="email"
+            className="block mb-2 text-sm md:text-base lg:text-lg"
+          >
             Your email address
           </label>
           <div className="relative">
@@ -68,11 +71,15 @@ export default function ResetPassword() {
               className="placeholder:font-nunito placeholder:text-slate-400 block w-full bg-transparent  border-2 border-slate-300 rounded-md py-2 pl-10 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-base lg:text-lg"
               placeholder="Type your email"
               type="text"
+              id="email"
+              aria-label="email"
               {...register("email", emailValidation)}
             />
 
             {/* Email Icon */}
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+            <span
+              className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+            >
               <span className="sr-only">Email Address Icon</span>
               <i className="fa-regular fa-envelope text-white"></i>
             </span>
@@ -88,7 +95,10 @@ export default function ResetPassword() {
 
         {/* OTP Input Group */}
         <div className="input-group  my-5 lg:my-7">
-          <label className="block mb-2 text-sm md:text-base lg:text-lg">
+          <label
+            htmlFor="OTP"
+            className="block mb-2 text-sm md:text-base lg:text-lg"
+          >
             OTP
           </label>
           <div className="relative">
@@ -97,11 +107,15 @@ export default function ResetPassword() {
               className="placeholder:font-nunito placeholder:text-slate-400 block w-full bg-transparent  border-2 border-slate-300 rounded-md py-2 pl-10 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-base lg:text-lg"
               placeholder="Type your otp"
               type="text"
+              id="OTP"
+              aria-label="OTP"
               {...register("otp", RequiredField("otp"))}
             />
 
             {/* OTP Icon */}
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+            <span
+              className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+            >
               <span className="sr-only">OTP Icon</span>
               <i className="fa-solid fa-hourglass-end text-white"></i>
             </span>
@@ -117,7 +131,10 @@ export default function ResetPassword() {
 
         {/* Password Input Group */}
         <div className="input-group mt-8  my-5 lg:my-7">
-          <label className="block mb-2 text-sm md:text-base lg:text-lg">
+          <label
+            htmlFor="Password"
+            className="block mb-2 text-sm md:text-base lg:text-lg"
+          >
             Password
           </label>
           <div className="relative">
@@ -125,12 +142,16 @@ export default function ResetPassword() {
             <input
               className="placeholder:font-nunito placeholder:text-slate-400 block w-full bg-transparent  border-2 border-slate-300 rounded-md py-2 pl-10 pr-10 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-base lg:text-lg"
               placeholder="Type your password"
+              id="Password"
+              aria-label="Password"
               type={showPassword ? "text" : "password"}
               {...register("password", PasswordValidation)}
             />
 
             {/* Lock Icon */}
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+            <span
+              className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+            >
               <span className="sr-only">Password Icon</span>
               <i className="fa-solid fa-lock text-white"></i>
             </span>
