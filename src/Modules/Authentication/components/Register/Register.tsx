@@ -66,7 +66,10 @@ export default function Register() {
           <div className="w-full block md:w-6/12 ">
             {/* first name Input Group */}
             <div className="input-group mb-6 md:mb-0">
-              <label className="block mb-2 text-sm md:text-base lg:text-lg">
+              <label
+                htmlFor="first_name"
+                className="block mb-2 text-sm md:text-base lg:text-lg"
+              >
                 Your first name
               </label>
               <div className="relative">
@@ -75,11 +78,15 @@ export default function Register() {
                   className="placeholder:font-nunito placeholder:text-slate-400 block w-full bg-transparent  border-2 border-slate-300 rounded-md py-2 pl-10 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-base lg:text-lg"
                   placeholder="Type your first name"
                   type="text"
+                  id="first_name"
+                  aria-label="first_name"
                   {...register("first_name", RequiredField("First Name"))}
                 />
 
                 {/* first name Icon */}
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                <span
+                  className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+                >
                   <span className="sr-only">first name Icon</span>
                   <i className="fa-solid fa-address-card text-white"></i>
                 </span>
@@ -97,7 +104,7 @@ export default function Register() {
           <div className="w-full block md:w-6/12 ">
             {/* last name Input Group */}
             <div className="input-group">
-              <label className="block mb-2 text-sm md:text-base lg:text-lg">
+              <label  htmlFor="last_name" className="block mb-2 text-sm md:text-base lg:text-lg">
                 Your last name
               </label>
               <div className="relative">
@@ -106,11 +113,15 @@ export default function Register() {
                   className="placeholder:font-nunito placeholder:text-slate-400 block w-full bg-transparent  border-2 border-slate-300 rounded-md py-2 pl-10 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-base lg:text-lg"
                   placeholder="Type your last name"
                   type="text"
+                  id="last_name"
+                  aria-label="last_name"
                   {...register("last_name", RequiredField("Last Name"))}
                 />
 
                 {/* last name Icon */}
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                <span
+                  className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+                >
                   <span className="sr-only">Last Name Icon</span>
                   <i className="fa-solid fa-address-card text-white"></i>
                 </span>
@@ -128,7 +139,7 @@ export default function Register() {
 
         {/* Email Input Group */}
         <div className="input-group my-6 lg:my-9">
-          <label className="block mb-2 text-sm md:text-base lg:text-lg">
+          <label htmlFor="email" className="block mb-2 text-sm md:text-base lg:text-lg">
             Your email address
           </label>
           <div className="relative">
@@ -137,11 +148,15 @@ export default function Register() {
               className="placeholder:font-nunito placeholder:text-slate-400 block w-full bg-transparent  border-2 border-slate-300 rounded-md py-2 pl-10 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-base lg:text-lg"
               placeholder="Type your email"
               type="text"
+              id="email"
+              aria-label="email"
               {...register("email", emailValidation)}
             />
 
             {/* Email Icon */}
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+            <span
+              className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+            >
               <span className="sr-only">Email Address Icon</span>
               <i className="fa-regular fa-envelope text-white"></i>
             </span>
@@ -157,7 +172,7 @@ export default function Register() {
 
         {/* role Select Field */}
         <div className="input-group my-6 lg:my-9">
-          <label className="block mb-2 text-sm md:text-base lg:text-lg">
+          <label htmlFor="role" className="block mb-2 text-sm md:text-base lg:text-lg">
             Your role
           </label>
           <div className="relative">
@@ -167,6 +182,8 @@ export default function Register() {
               {...register("role", RequiredField("Select role"))}
               value={selectedRole}
               onChange={(e) => setSelectedRole(e.target.value)}
+              id="role"
+              aria-label="role"
             >
               <option className="text-black" value="" disabled>
                 Choose your role
@@ -179,7 +196,9 @@ export default function Register() {
             </select>
 
             {/* role Select Icon */}
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+            <span
+              className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+            >
               <span className="sr-only">role Select Icon</span>
               <i className="fa-solid fa-user text-white"></i>
             </span>
@@ -195,7 +214,7 @@ export default function Register() {
 
         {/* Password Input Group */}
         <div className="input-group mt-8 my-6 lg:my-9">
-          <label className="block mb-2 text-sm md:text-base lg:text-lg">
+          <label htmlFor="password" className="block mb-2 text-sm md:text-base lg:text-lg">
             Password
           </label>
           <div className="relative">
@@ -203,12 +222,16 @@ export default function Register() {
             <input
               className="placeholder:font-nunito placeholder:text-slate-400 block w-full bg-transparent  border-2 border-slate-300 rounded-md py-2 pl-10 pr-10 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm md:text-base lg:text-lg"
               placeholder="Type your password"
+              id="password"
+              aria-label="password"
               type={showPassword ? "text" : "password"}
               {...register("password", PasswordValidation)}
             />
 
             {/* Lock Icon */}
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+            <span
+              className={`absolute inset-y-0 flex items-center ${Styles["auth-icon"]}`}
+            >
               <span className="sr-only">Password Icon</span>
               <i className="fa-solid fa-lock text-white"></i>
             </span>
