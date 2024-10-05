@@ -112,7 +112,7 @@ export default function ChangePassword() {
 
         {/* New Password Input Group */}
         <div className="input-group mt-8  my-6 lg:my-14">
-          <label htmlFor=" NewPassword" className="block mb-2 text-sm md:text-base lg:text-lg">
+          <label htmlFor="NewPassword" className="block mb-2 text-sm md:text-base lg:text-lg">
             New Password
           </label>
           <div className="relative">
