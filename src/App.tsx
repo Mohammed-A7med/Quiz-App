@@ -18,7 +18,7 @@ import ResultsList from "./Modules/Results/components/Results/ResultsList";
 import StudentsList from "./Modules/Students/components/Students/StudentsList";
 
 function App() {
-  const routes = createHashRouter([
+  const routes = createBrowserRouter([
     {
       path: "",
       element: <Authlayout />,
