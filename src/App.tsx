@@ -1,4 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Authlayout from "./Modules/Shared/components/Authlayout/Authlayout";
 import NotFound from "./Modules/Shared/components/NotFound/NotFound";
@@ -9,7 +11,6 @@ import ResetPassword from "./Modules/Authentication/components/ResetPassword/Res
 import ChangePassword from "./Modules/Authentication/components/ChangePassword/ChangePassword";
 import Masterlayout from "./Modules/Shared/components/Masterlayout/Masterlayout";
 import Dashboard from "./Modules/Dashboard/components/Dashboard/Dashboard";
-import { ToastContainer } from "react-toastify";
 import GroupsList from "./Modules/Groups/components/Groups/GroupsList";
 import QuestionsList from "./Modules/Questions/components/Questions/QuestionsList";
 import Quize from "./Modules/Quizes/components/Quizes/Quize";
@@ -48,7 +49,7 @@ function App() {
   ]);
   return (
     <>
-       <ToastContainer />
+      <ToastContainer />
       <RouterProvider router={routes}></RouterProvider>
     </>
   );
