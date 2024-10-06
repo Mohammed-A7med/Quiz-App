@@ -1,4 +1,4 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, createHashRouter } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -18,7 +18,7 @@ import ResultsList from "./Modules/Results/components/Results/ResultsList";
 import StudentsList from "./Modules/Students/components/Students/StudentsList";
 
 function App() {
-  const routes = createBrowserRouter([
+  const routes = createHashRouter([
     {
       path: "",
       element: <Authlayout />,
