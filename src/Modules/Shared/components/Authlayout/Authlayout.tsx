@@ -22,7 +22,7 @@ export default function Authlayout() {
 
           {/* Right side: Background Image */}
           <div className="w-full md:w-6/12 mt-5 md:mt-10 hidden md:block">
-            <div className="auth-img flex justify-center md:justify-end items-center h-full">
+            <div className="auth-img flex justify-center md:justify-end items-start h-full">
               <img
                 className="w-10/12 md:w-11/12 lg:w-12/12 object-cover"
                 src={bgAuth}
