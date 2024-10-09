@@ -8,7 +8,7 @@ export default function Button({
   disabled,
   type = "button",
 }: {
-  text: string
+  text?: string
   icon?: JSX.Element
   className?: string
   onClick?: () => void
@@ -24,7 +24,7 @@ export default function Button({
         type={type}
       >
         {icon ? icon : ""}
-        {text}
+        {text ? text : ""}
       </button>
     </>
   )

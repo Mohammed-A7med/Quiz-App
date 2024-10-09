@@ -18,17 +18,19 @@ export interface Question {
   points?: number
   type: string
 }
-interface QuestionOption {
-  A: string
-  B: string
-  C: string
-  D: string
-}
 interface QuestionsState {
   questions: Question[]
   question: Question | null
   loading: boolean
   error: string | null
+  errorObject: any | null
+}
+
+interface QuestionOption {
+  A: string
+  B: string
+  C: string
+  D: string
 }
 
 const initialState: QuestionsState = {
@@ -36,6 +38,7 @@ const initialState: QuestionsState = {
   question: null,
   loading: false,
   error: null,
+  errorObject: null,
 }
 
 export const fetchAllQuestions = createAsyncThunk<Question[]>(
@@ -126,6 +129,7 @@ const questionSlice = createSlice({
       .addCase(fetchAllQuestions.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message || "Failed to fetch questions"
+        state.errorObject = action.error
       })
       .addCase(fetchQuestion.pending, (state) => {
         state.loading = true
@@ -140,6 +144,7 @@ const questionSlice = createSlice({
       .addCase(fetchQuestion.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message || "Failed to fetch the question"
+        state.errorObject = action.error
       })
       .addCase(updateQuestion.pending, (state) => {
         state.loading = true
@@ -159,6 +164,7 @@ const questionSlice = createSlice({
       .addCase(updateQuestion.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message || "Failed to update the question"
+        state.errorObject = action.error
       })
   },
 })

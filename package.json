@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
-    "@reduxjs/toolkit": "^2.2.7",
+    "@reduxjs/toolkit": "^2.2.8",
     "axios": "^1.7.7",
     "formik": "^2.4.6",
     "framer-motion": "^11.9.0",
@@ -26,6 +26,8 @@
     "react-router-dom": "^6.26.2",
     "react-toastify": "^10.0.5",
     "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0",
+    "sweetalert2": "^11.14.2",
     "yup": "^1.4.0"
   },
   "devDependencies": {

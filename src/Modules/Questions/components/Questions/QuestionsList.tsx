@@ -20,6 +20,7 @@ import Modal from "react-modal"
 import Input from "../../../../utils/components/Input"
 import Textarea from "../../../../utils/components/Textarea"
 import Select from "../../../../utils/components/Select"
+import Swal from "sweetalert2"
 
 const customStyles = {
   content: {
@@ -64,9 +65,18 @@ const validationSchema = Yup.object({
 
 export default function QuestionsList() {
   const dispatch = useDispatch<AppDispatch>()
-  const { questions, loading, error } = useSelector(
+  const { questions, loading, error, errorObject } = useSelector(
     (state: AppState) => state.questions
   )
+  const [page, setPage] = useState<number>(1)
+  const [limit, setLimit] = useState<number>(10)
+
+  const pagination = (): void => {
+    const page = 1
+    const limit = 10
+    setPage(page)
+    setLimit(limit)
+  }
 
   const [modalIsOpen, setIsOpen] = useState(false)
   const [modalMode, setModalMode] = useState<"add" | "edit" | "view">("add")
@@ -105,7 +115,12 @@ export default function QuestionsList() {
               answer: values.answer,
               description: values.description,
               difficulty: values.difficulty,
-              options: values.options,
+              options: {
+                A: values.options.A,
+                B: values.options.B,
+                C: values.options.C,
+                D: values.options.D,
+              },
               title: values.title,
               type: values.type,
             },
@@ -141,11 +156,32 @@ export default function QuestionsList() {
     formik.resetForm()
   }
 
+  function deleteQuestionModel(id: string) {
+    Swal.fire({
+      title: "Are you sure? Question will be deleted!",
+      showDenyButton: true,
+      denyButtonText: `No`,
+      denyButtonColor: `black`,
+      confirmButtonColor: "#00000040",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteQuestion(id)).then((res) => {
+          const payload = res.payload as { message?: string }
+          if (payload.message) {
+            toast.success(payload.message)
+            Swal.fire("Deleted!", "", "success")
+          }
+        })
+      }
+    })
+  }
   useEffect(() => {
     dispatch(fetchAllQuestions())
   }, [dispatch])
 
   if (loading) return <LoadingSpinner />
+  if (errorObject) console.log(errorObject)
 
   if (error) {
     return <ErrorAlert message={error} />
@@ -206,76 +242,116 @@ export default function QuestionsList() {
         </thead>
 
         <tbody>
-          {questions.map((q) => (
-            <motion.tr
-              key={q._id}
-              className="hover:bg-gray-100 transition-colors"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-            >
-              <motion.td
-                initial={{ opacity: 0, y: -60 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="border border-gray-300 p-2"
-              >
-                {q.title}
-              </motion.td>
-              <motion.td
-                initial={{ opacity: 0, y: -60 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="border border-gray-300 p-2"
-              >
-                {q.description}
-              </motion.td>
-              <motion.td
-                initial={{ opacity: 0, y: -60 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="border border-gray-300 p-2"
-              >
-                {q.difficulty}
-              </motion.td>
-              <motion.td
-                initial={{ opacity: 0, y: -60 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="border border-gray-300 p-2 text-center"
-              >
-                <button
-                  className="text-blue-500 hover:underline"
-                  onClick={() => openModal("view", q)}
+          {questions.map(
+            (q, i) =>
+              i >= (page - 1) * limit &&
+              i < page * limit && (
+                <motion.tr
+                  key={q._id}
+                  className="hover:bg-gray-100 transition-colors"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <i className="fas fa-eye"></i>
-                </button>
-                <button
-                  className="text-orange-500 hover:underline mx-2"
-                  onClick={() => openModal("edit", q)}
-                >
-                  <i className="fas fa-edit"></i>
-                </button>
-                <button
-                  className="text-red-500 hover:underline"
-                  onClick={() => {
-                    dispatch(deleteQuestion(q?._id!)).then((res) => {
-                      const payload = res.payload as { message?: string }
-                      if (payload.message) {
-                        toast.success(payload.message)
-                      }
-                    })
-                  }}
-                >
-                  <i className="fas fa-trash"></i>
-                </button>
-              </motion.td>
-            </motion.tr>
-          ))}
+                  <motion.td
+                    initial={{ opacity: 0, y: -60 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="border border-gray-300 p-2"
+                  >
+                    {q.title}
+                  </motion.td>
+                  <motion.td
+                    initial={{ opacity: 0, y: -60 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="border border-gray-300 p-2"
+                  >
+                    {q.description}
+                  </motion.td>
+                  <motion.td
+                    initial={{ opacity: 0, y: -60 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="border border-gray-300 p-2"
+                  >
+                    {q.difficulty}
+                  </motion.td>
+                  <motion.td
+                    initial={{ opacity: 0, y: -60 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="border border-gray-300 p-2 text-center"
+                  >
+                    <button
+                      className="text-blue-500 hover:underline"
+                      onClick={() => openModal("view", q)}
+                    >
+                      <i className="fas fa-eye"></i>
+                    </button>
+                    <button
+                      className="text-orange-500 hover:underline mx-2"
+                      onClick={() => openModal("edit", q)}
+                    >
+                      <i className="fas fa-edit"></i>
+                    </button>
+                    <button
+                      className="text-red-500 hover:underline"
+                      onClick={() => {
+                        deleteQuestionModel(q._id!)
+                      }}
+                    >
+                      <i className="fas fa-trash"></i>
+                    </button>
+                  </motion.td>
+                </motion.tr>
+              )
+          )}
         </tbody>
       </motion.table>
+      <div className="flex justify-center items-center gap-4 mt-4">
+        <Button
+          icon={<i className="fas fa-arrow-left"></i>}
+          className="bg-gray-300 text-gray-700"
+          onClick={() => {
+            if (page > 1) {
+              setPage(page - 1)
+            }
+            if (page === 1) {
+              pagination()
+            }
+          }}
+        />
 
-      {/* Dynamic Modal for Add, Edit, and View */}
+        <Button
+          text="First"
+          className="bg-gray-400 text-gray-900"
+          onClick={() => {
+            setPage(1)
+          }}
+        />
+        <span>
+          {page} of {Math.ceil(questions.length / limit)}
+        </span>
+        <Button
+          text="Last"
+          className="bg-gray-400 text-gray-900"
+          onClick={() => {
+            setPage(Math.ceil(questions.length / limit))
+          }}
+        />
+        <Button
+          icon={<i className="fas fa-arrow-right"></i>}
+          className="bg-gray-300 text-gray-700"
+          onClick={() => {
+            setPage(page + 1)
+            if (page === Math.ceil(questions.length / limit)) {
+              pagination()
+            }
+          }}
+        />
+      </div>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -411,7 +487,7 @@ export default function QuestionsList() {
               onChange={formik.handleChange}
               value={formik.values.answer}
               label="Right Answer"
-              width={36}
+              width={42}
               options={[
                 { value: "A", label: "A" },
                 { value: "B", label: "B" },
