@@ -1,24 +1,22 @@
-import { useDispatch, useSelector } from "react-redux";
-import { saveUserData, clearUserData } from "./AuthSlice";
-import store from "./store"; // Import the configured store
+import { useDispatch, useSelector } from "react-redux"
+import { saveUserData, clearUserData } from "./Slices/AuthSlice"
+import store, { AppState } from "./store"
 
-type AppState = ReturnType<typeof store.getState>;
-
-export const useAppSelector = useSelector.withTypes<AppState>();
-export const useAppDispatch = useDispatch.withTypes<typeof store.dispatch>();
+export const useAppSelector = useSelector.withTypes<AppState>()
+export const useAppDispatch = useDispatch.withTypes<typeof store.dispatch>()
 
 // Custom hook for auth-related actions
 export const useAuth = () => {
-  const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state.auth.userData);
+  const dispatch = useAppDispatch()
+  const userData = useAppSelector((state) => state.auth.userData)
 
   const handleSaveUserData = () => {
-    dispatch(saveUserData());
-  };
+    dispatch(saveUserData())
+  }
 
   const handleClearUserData = () => {
-    dispatch(clearUserData());
-  };
+    dispatch(clearUserData())
+  }
 
-  return { userData, handleSaveUserData, handleClearUserData };
-};
+  return { userData, handleSaveUserData, handleClearUserData }
+}

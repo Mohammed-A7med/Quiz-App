@@ -264,7 +264,7 @@ export default function Register() {
         </div>
 
         {/* Submit Button*/}
-        <div className="flex flex-col md:flex-row justify-between items-center mt-14 ">
+        <div className="flex flex-col md:flex-row justify-between items-center mt-14 mb-14">
           {/* Sign In Button */}
           <button
             type="submit"
