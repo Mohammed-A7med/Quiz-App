@@ -1,11 +1,24 @@
 import { useEffect, useState } from "react";
 import Styles from "./GroupsList.module.css";
 import { GroupListResponse } from "../../../../interfaces/Groups/GroupsListResponse";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { GROUPS_URLs, requestHeader } from "../../../../constans/END_POINTS";
+import DeleteConfirmationModal from "../../../Shared/components/DeleteConfirmationModal/DeleteConfirmationModal";
+import { AxiosErrorResponse } from "../../../../interfaces/Authentication/AuthResponse";
+import { toast } from "react-toastify";
 
 export default function GroupsList() {
+  const [groupId, setGroupId] = useState("0");
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const handleCloseModal = () => setShowModal(false);
+  const handleShowModel = (projectId: string) => {
+    setGroupId(projectId);
+    setShowModal(true);
+  };
+
   const [groupsList, setGroupsList] = useState<GroupListResponse[]>([]);
+
+  // Function to fetch the list of Groups from the API
   const getAllGroups = async () => {
     try {
       const response = await axios.get(GROUPS_URLs.getAll, {
@@ -14,7 +27,27 @@ export default function GroupsList() {
       setGroupsList(response.data);
       console.log(response);
     } catch (error) {
-      console.log(error);
+      const axiosError = error as AxiosError<AxiosErrorResponse>;
+      toast.error(axiosError.response?.data.message);
+    }
+  };
+
+  // Function to delete a Group
+  const DeleteGroup = async () => {
+    try {
+      const response = await axios.delete(GROUPS_URLs.delete(groupId), {
+        headers: requestHeader(),
+      });
+      console.log(response);
+      handleCloseModal();
+      getAllGroups();
+      toast.success("Group deleted successfully.");
+    } catch (error) {
+      const axiosError = error as AxiosError<AxiosErrorResponse>;
+      toast.error(
+        axiosError.response?.data.message ||
+          "Failed to delete the Group. Please try again."
+      );
     }
   };
 
@@ -24,6 +57,14 @@ export default function GroupsList() {
 
   return (
     <>
+      {/* DeleteConfirmationModal component displays a confirmation dialog when deleting an item */}
+      <DeleteConfirmationModal
+        title="Group"
+        showModal={showModal}
+        handleCloseModal={handleCloseModal}
+        handleDeleteModal={DeleteGroup}
+      />
+
       {/* Container for the "Add Group" button, aligned to the right */}
       <div className="flex w-full justify-end my-5">
         <button
@@ -97,6 +138,7 @@ export default function GroupsList() {
                   <button
                     className="inline-block p-3 hover:bg-gray-50 focus:relative"
                     title="Delete Product"
+                    onClick={() => handleShowModel(list._id)}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +159,7 @@ export default function GroupsList() {
           ))}
         </div>
       </div>
-      
+
       {/* pagination control with a list of page numbers and navigation buttons */}
       <ol className="flex justify-center gap-1 text-xs font-medium my-5">
         <li>

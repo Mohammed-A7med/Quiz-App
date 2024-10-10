@@ -73,8 +73,8 @@ export const GROUPS_URLs = {
   getById: (id: string) => `${GROUPS_BASE_URL}/${id}`,
 
   // URL for updating a group by ID
-  update: (id: string) => `${GROUPS_BASE_URL}/${id}/update`,
+  update: (id: string) => `${GROUPS_BASE_URL}/${id}`,
 
   // URL for deleting a group by ID
-  delete: (id: string) => `${GROUPS_BASE_URL}/${id}/delete`,
+  delete: (id: string) => `${GROUPS_BASE_URL}/${id}`,
 };
