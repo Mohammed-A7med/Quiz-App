@@ -1,17 +1,20 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { NavLink } from "react-router-dom"
-import logo from "../../../../assets/Logo-white.png"
+import logo from "../../../../assets/Logo icon.png"
+import { toggleSidebarAction } from "../../../../store/Slices/sidebarSlice"
+import { useDispatch } from "react-redux"
 
 export default function SideBar() {
   const [isExpanded, setIsExpanded] = useState(true)
-
+  const dispatch = useDispatch()
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded)
+    dispatch(toggleSidebarAction())
   }
 
   return (
     <div
-      className={`flex flex-col h-screen bg-white shadow-lg transition-all duration-300 ${
+      className={`flex flex-col h-full bg-white shadow-lg transition-all duration-300 ${
         isExpanded ? "w-64" : "w-20"
       }`}
     >
@@ -42,16 +45,25 @@ export default function SideBar() {
             },
             { to: "/dashboard/groups", icon: "fas fa-users", label: "Groups" },
             {
+              to: "/dashboard/students",
+              icon: "fas fa-user-graduate",
+              label: "Students",
+            },
+            {
               to: "/dashboard/questions",
               icon: "fas fa-question",
               label: "Questions",
             },
             {
               to: "/dashboard/quizzes",
-              icon: "fas fa-poll-h",
+              icon: "fas fa-pen-square",
               label: "Quizzes",
             },
-            { to: "/dashboard/results", icon: "fas fa-poll", label: "Results" },
+            {
+              to: "/dashboard/results",
+              icon: "fa-solid fa-square-poll-vertical",
+              label: "Results",
+            },
           ].map((item) => (
             <li key={item.to}>
               <NavLink
@@ -81,7 +93,7 @@ export default function SideBar() {
 
       <div className="p-4 border-t border-gray-200">
         <NavLink
-          to="/settings"
+          to="/help"
           className="flex items-center p-2 rounded-lg text-gray-600 hover:bg-gray-100"
         >
           <i className="fas fa-cog mr-3"></i>

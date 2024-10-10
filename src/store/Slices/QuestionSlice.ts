@@ -17,6 +17,7 @@ export interface Question {
   difficulty: string
   points?: number
   type: string
+  date?: string
 }
 interface QuestionsState {
   questions: Question[]

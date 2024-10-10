@@ -39,3 +39,21 @@ export const QUESTION_URLs = {
   updateQuestion: (id: string) => `${QUESTIONS_BASE_URL}/${id}`,
   deleteQuestion: (id: string) => `${QUESTIONS_BASE_URL}/${id}`,
 }
+
+const QUIZ_BASE_URL = `${BASE_URLS}/quiz`
+
+export const QUIZ_URLs = {
+  fetchAllQuizzes: `${QUIZ_BASE_URL}`,
+  fetchQuiz: (id: string) => `${QUIZ_BASE_URL}/${id}`,
+  createQuiz: `${QUIZ_BASE_URL}`,
+  updateQuiz: (id: string) => `${QUIZ_BASE_URL}/${id}`,
+  deleteQuiz: (id: string) => `${QUIZ_BASE_URL}/${id}`,
+  joinQuiz: `${QUIZ_BASE_URL}//join`,
+  submitQuiz: (id: string) => `${QUIZ_BASE_URL}/submit/${id}`,
+  fetchQuizResults: `${QUIZ_BASE_URL}/result/`,
+  fetchFiveUpcomingQuizzes: `${QUIZ_BASE_URL}/incoming`,
+  fetchLastFiveQuizzes: `${QUIZ_BASE_URL}/completed`,
+  reassignQuiz: (id: string) => `${QUIZ_BASE_URL}/reassign/${id}`,
+  fetchQuestionsWithAnswers: (id: string) =>
+    `${QUIZ_BASE_URL}/without-answers/${id}`,
+}
