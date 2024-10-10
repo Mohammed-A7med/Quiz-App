@@ -110,7 +110,7 @@ export default function Login() {
               type={showPassword ? "text" : "password"}
               id="password"
               aria-label="password"
-              {...register("password", PasswordValidation)}
+              {...register("password")}
             />
 
             {/* Lock Icon */}
