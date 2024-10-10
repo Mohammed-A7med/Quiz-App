@@ -6,8 +6,11 @@ import { GROUPS_URLs, requestHeader } from "../../../../constans/END_POINTS";
 import DeleteConfirmationModal from "../../../Shared/components/DeleteConfirmationModal/DeleteConfirmationModal";
 import { AxiosErrorResponse } from "../../../../interfaces/Authentication/AuthResponse";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import GroupsData from "../GroupsData/GroupsData";
 
 export default function GroupsList() {
+  const [groupsList, setGroupsList] = useState<GroupListResponse[]>([]);
   const [groupId, setGroupId] = useState("0");
   const [showModal, setShowModal] = useState<boolean>(false);
   const handleCloseModal = () => setShowModal(false);
@@ -16,7 +19,10 @@ export default function GroupsList() {
     setShowModal(true);
   };
 
-  const [groupsList, setGroupsList] = useState<GroupListResponse[]>([]);
+  // For Add Group Modal
+  const [showAddUpdateModal, setShowAddUpdateModal] = useState<boolean>(false);
+  const handleOpenAddUpdateModal = () => setShowAddUpdateModal(true);
+  const handleCloseAddUpdateModal = () => setShowAddUpdateModal(false);
 
   // Function to fetch the list of Groups from the API
   const getAllGroups = async () => {
@@ -25,7 +31,6 @@ export default function GroupsList() {
         headers: requestHeader(),
       });
       setGroupsList(response.data);
-      console.log(response);
     } catch (error) {
       const axiosError = error as AxiosError<AxiosErrorResponse>;
       toast.error(axiosError.response?.data.message);
@@ -35,10 +40,9 @@ export default function GroupsList() {
   // Function to delete a Group
   const DeleteGroup = async () => {
     try {
-      const response = await axios.delete(GROUPS_URLs.delete(groupId), {
+      await axios.delete(GROUPS_URLs.delete(groupId), {
         headers: requestHeader(),
       });
-      console.log(response);
       handleCloseModal();
       getAllGroups();
       toast.success("Group deleted successfully.");
@@ -57,6 +61,11 @@ export default function GroupsList() {
 
   return (
     <>
+      {/* Add Group Modal */}
+      {showAddUpdateModal && (
+        <GroupsData handleCloseAddUpdateModal={handleCloseAddUpdateModal}  getAllGroups={getAllGroups}/>
+      )}
+
       {/* DeleteConfirmationModal component displays a confirmation dialog when deleting an item */}
       <DeleteConfirmationModal
         title="Group"
@@ -68,6 +77,7 @@ export default function GroupsList() {
       {/* Container for the "Add Group" button, aligned to the right */}
       <div className="flex w-full justify-end my-5">
         <button
+          onClick={handleOpenAddUpdateModal}
           className={`inline-flex items-center gap-2 rounded-full bg-transparent px-4 py-2 text-black shadow-sm focus:relative ${Styles["border-btn"]}`}
         >
           <svg
@@ -115,23 +125,26 @@ export default function GroupsList() {
                   <button
                     className="inline-block p-3 text-gray-700 hover:bg-gray-50 focus:relative"
                     title="Edit Product"
+                    onClick={handleOpenAddUpdateModal}
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="19"
-                      height="19"
-                      fill="none"
-                      viewBox="0 0 19 19"
-                    >
-                      <path
-                        fill="#222"
-                        d="M4 15.011l4.413-.015 9.632-9.54c.378-.378.586-.88.586-1.414 0-.534-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L4 10.581v4.43zM15.045 2.456l1.589 1.583-1.597 1.582-1.586-1.585 1.594-1.58zM6 11.416l6.03-5.974 1.586 1.586L7.587 13 6 13.004v-1.589z"
-                      ></path>
-                      <path
-                        fill="#222"
-                        d="M2 19h14c1.103 0 2-.897 2-2V8.332l-2 2V17H5.158c-.026 0-.053.01-.079.01-.033 0-.066-.009-.1-.01H2V3h6.847l2-2H2C.897 1 0 1.897 0 3v14c0 1.103.897 2 2 2z"
-                      ></path>
-                    </svg>
+                    <Link to={`/dashboard/groups-edit/${list._id}`} state={{GroupData: list, type: "edit"}}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="19"
+                        height="19"
+                        fill="none"
+                        viewBox="0 0 19 19"
+                      >
+                        <path
+                          fill="#222"
+                          d="M4 15.011l4.413-.015 9.632-9.54c.378-.378.586-.88.586-1.414 0-.534-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L4 10.581v4.43zM15.045 2.456l1.589 1.583-1.597 1.582-1.586-1.585 1.594-1.58zM6 11.416l6.03-5.974 1.586 1.586L7.587 13 6 13.004v-1.589z"
+                        ></path>
+                        <path
+                          fill="#222"
+                          d="M2 19h14c1.103 0 2-.897 2-2V8.332l-2 2V17H5.158c-.026 0-.053.01-.079.01-.033 0-.066-.009-.1-.01H2V3h6.847l2-2H2C.897 1 0 1.897 0 3v14c0 1.103.897 2 2 2z"
+                        ></path>
+                      </svg>
+                    </Link>
                   </button>
 
                   {/* Delete button */}

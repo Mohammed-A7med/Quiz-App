@@ -67,6 +67,7 @@ export default function DeleteConfirmationModal({
             type="button"
             className="border-2 border-gray-200 text-gray-700 rounded px-4 py-2 mr-2 hover:bg-gray-200"
             aria-label="Cancel"
+            onClick={handleCloseModal}
           >
             Cancel
           </button>

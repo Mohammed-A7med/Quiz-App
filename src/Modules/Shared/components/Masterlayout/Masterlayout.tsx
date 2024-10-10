@@ -1,15 +1,10 @@
-import { Outlet } from "react-router-dom"
-import SideBar from "../SideBar/SideBar"
 import { useSelector } from "react-redux"
+import { Outlet } from "react-router-dom"
 import { AppState } from "../../../../store/store"
-import { useEffect } from "react"
+import SideBar from "../SideBar/SideBar"
 
 export default function Masterlayout() {
   const sidebarState = useSelector((state: AppState) => state.sidebar.show)
-
-  useEffect(() => {
-    console.log(sidebarState)
-  }, [sidebarState])
 
   return (
     <div
