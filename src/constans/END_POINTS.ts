@@ -13,20 +13,10 @@ export const requestHeader = () => {
 const AUTHENTICATION_BASE_URL = `${BASE_URLS}/auth`
 
 export const AUTH_URLs = {
-  // URL for user login
   login: `${AUTHENTICATION_BASE_URL}/login`,
-
-
-  // URL for user registration
   register: `${AUTHENTICATION_BASE_URL}/register`,
-
-  // URL for requesting a password reset link
   forgotPassword: `${AUTHENTICATION_BASE_URL}/forgot-password`,
-
-  // URL for resetting the password
   ResetPassword: `${AUTHENTICATION_BASE_URL}/reset-password`,
-
-  // URL for changing the user's password
   ChangePassword: `${AUTHENTICATION_BASE_URL}/change-password`,
 }
 
@@ -63,18 +53,17 @@ export const QUIZ_URLs = {
 const GROUPS_BASE_URL = `${BASE_URLS}/group`;
 
 export const GROUPS_URLs = {
-  // URL for getting all groups
   getAll: `${GROUPS_BASE_URL}`,
-
-  // URL for creating a new group
   create: `${GROUPS_BASE_URL}`,
-
-  // URL for getting a group by ID
   getById: (id: string) => `${GROUPS_BASE_URL}/${id}`,
-
-  // URL for updating a group by ID
   update: (id: string) => `${GROUPS_BASE_URL}/${id}`,
-
-  // URL for deleting a group by ID
   delete: (id: string) => `${GROUPS_BASE_URL}/${id}`,
+};
+
+
+//student_BASE_URL urls
+const STUDENTS_BASE_URL = `${BASE_URLS}/student`;
+
+export const STUDENTS_URLs = {
+  getAll: `${STUDENTS_BASE_URL}`,
 };

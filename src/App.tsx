@@ -40,6 +40,7 @@ function App() {
         { index: true, element: <Dashboard /> },
         { path: "dashboard", element: <Dashboard /> },
         { path: "groups", element: <GroupsList /> },
+        { path: "groups-edit/:id", element: <GroupsList /> },
         { path: "questions", element: <QuestionsList /> },
         { path: "quizzes", element: <Quize /> },
         { path: "results", element: <ResultsList /> },

@@ -64,7 +64,7 @@ export default function Login() {
         className="text-white px-4 md:px-6 lg:px-8 w-full"
       >
         {/* Email Input Group */}
-        <div className="input-group  mb-6 lg:mb-9">
+        <div className="input-group mb-6 lg:mb-9">
           <label
             htmlFor="email"
             className="block mb-2 text-sm md:text-base lg:text-lg"
