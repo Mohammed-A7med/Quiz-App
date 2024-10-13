@@ -89,10 +89,10 @@ export default function GroupsData({
         </div>
         <div className="p-4 ">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="mt-5 flex border-2 rounded-lg   outline-none focus-within:ring-1 relative">
+            <div className="mt-5 flex border-2 rounded-lg border-black  outline-none focus-within:border-black relative">
               <label
                 htmlFor="name"
-                className="bg-secondColor p-2 font-semibold flex justify-center min-w-20"
+                className="bg-black text-white p-2 font-semibold flex justify-center min-w-20 "
               >
                 Group Name
               </label>
@@ -109,15 +109,15 @@ export default function GroupsData({
               </span>
             )}
 
-            <div className="mt-5 border-2 rounded-lg outline-none focus-within:ring-1 relative">
+            <div className="mt-5 border-2 rounded-lg outline-none focus-within:ring-1 relative border-black">
               <label
                 htmlFor="students"
-                className="flex justify-center p-2 font-semibold bg-secondColor min-w-20"
+                className="flex justify-center p-2 font-semibold bg-black text-white min-w-20"
               >
                 List Students
               </label>
               <select
-                className="px-2 rounded-r-md outline-none flex-1 border-none  bg-transparent py-1.5 pl-1 text-black placeholder:text-gray-400  sm:text-sm sm:leading-5 w-full"
+                className="px-2 rounded-r-md outline-none flex-1 border-none  bg-transparent py-1.5 pl-1 text-black placeholder:text-gray-400  sm:text-sm sm:leading-5 w-full "
                 {...register("students", RequiredField("List Students"))}
                 id="students"
                 value={selectedStudentsList}
