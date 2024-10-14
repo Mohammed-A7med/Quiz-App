@@ -8,7 +8,6 @@ export default function Select({
   value,
   label,
   options,
-  width,
   disabled,
 }: {
   children: JSX.Element
@@ -18,7 +17,6 @@ export default function Select({
   value?: string
   label: string
   options: { value: string; label: string }[]
-  width?: number
   disabled?: boolean
 }) {
   return (
