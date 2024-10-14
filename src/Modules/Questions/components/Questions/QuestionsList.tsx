@@ -1,26 +1,25 @@
-import React from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { AppDispatch, AppState } from "../../../../store/store"
+import { useFormik } from "formik"
+import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import Modal from "react-modal"
+import { useDispatch, useSelector } from "react-redux"
+import { toast } from "react-toastify"
+import Swal from "sweetalert2"
+import * as Yup from "yup"
 import {
+  Question,
   addQuestion,
   deleteQuestion,
   fetchAllQuestions,
   updateQuestion,
-  Question,
 } from "../../../../store/Slices/QuestionSlice"
-import { motion } from "framer-motion"
-import { toast } from "react-toastify"
+import { AppDispatch, AppState } from "../../../../store/store"
 import ErrorAlert from "../../../../utils/ErrorAlert"
 import Button from "../../../../utils/components/Button"
-import LoadingSpinner from "../../../../utils/components/loader"
-import * as Yup from "yup"
-import { useFormik } from "formik"
-import Modal from "react-modal"
 import Input from "../../../../utils/components/Input"
-import Textarea from "../../../../utils/components/Textarea"
 import Select from "../../../../utils/components/Select"
-import Swal from "sweetalert2"
+import Textarea from "../../../../utils/components/Textarea"
+import LoadingSpinner from "../../../../utils/components/loader"
 
 const customStyles = {
   content: {
